@@ -1,0 +1,432 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D4C58B681BEF66DE00178908 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C58B671BEF66DE00178908 /* AppDelegate.swift */; };
+		D4C58B6A1BEF66DE00178908 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D4C58B691BEF66DE00178908 /* GameScene.sks */; };
+		D4C58B6C1BEF66DE00178908 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C58B6B1BEF66DE00178908 /* GameScene.swift */; };
+		D4C58B6E1BEF66DE00178908 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C58B6D1BEF66DE00178908 /* GameViewController.swift */; };
+		D4C58B711BEF66DE00178908 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4C58B6F1BEF66DE00178908 /* Main.storyboard */; };
+		D4C58B731BEF66DE00178908 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4C58B721BEF66DE00178908 /* Images.xcassets */; };
+		D4C58B761BEF66DE00178908 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4C58B741BEF66DE00178908 /* LaunchScreen.xib */; };
+		D4C58B821BEF66DE00178908 /* KodamaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C58B811BEF66DE00178908 /* KodamaTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D4C58B7C1BEF66DE00178908 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4C58B5A1BEF66DE00178908 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4C58B611BEF66DE00178908;
+			remoteInfo = Kodama;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D4C58B621BEF66DE00178908 /* Kodama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kodama.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4C58B661BEF66DE00178908 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4C58B671BEF66DE00178908 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D4C58B691BEF66DE00178908 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		D4C58B6B1BEF66DE00178908 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		D4C58B6D1BEF66DE00178908 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		D4C58B701BEF66DE00178908 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D4C58B721BEF66DE00178908 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D4C58B751BEF66DE00178908 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		D4C58B7B1BEF66DE00178908 /* KodamaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KodamaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4C58B801BEF66DE00178908 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4C58B811BEF66DE00178908 /* KodamaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KodamaTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D4C58B5F1BEF66DE00178908 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4C58B781BEF66DE00178908 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D4C58B591BEF66DE00178908 = {
+			isa = PBXGroup;
+			children = (
+				D4C58B641BEF66DE00178908 /* Kodama */,
+				D4C58B7E1BEF66DE00178908 /* KodamaTests */,
+				D4C58B631BEF66DE00178908 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D4C58B631BEF66DE00178908 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D4C58B621BEF66DE00178908 /* Kodama.app */,
+				D4C58B7B1BEF66DE00178908 /* KodamaTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D4C58B641BEF66DE00178908 /* Kodama */ = {
+			isa = PBXGroup;
+			children = (
+				D4C58B671BEF66DE00178908 /* AppDelegate.swift */,
+				D4C58B691BEF66DE00178908 /* GameScene.sks */,
+				D4C58B6B1BEF66DE00178908 /* GameScene.swift */,
+				D4C58B6D1BEF66DE00178908 /* GameViewController.swift */,
+				D4C58B6F1BEF66DE00178908 /* Main.storyboard */,
+				D4C58B721BEF66DE00178908 /* Images.xcassets */,
+				D4C58B741BEF66DE00178908 /* LaunchScreen.xib */,
+				D4C58B651BEF66DE00178908 /* Supporting Files */,
+			);
+			path = Kodama;
+			sourceTree = "<group>";
+		};
+		D4C58B651BEF66DE00178908 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D4C58B661BEF66DE00178908 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D4C58B7E1BEF66DE00178908 /* KodamaTests */ = {
+			isa = PBXGroup;
+			children = (
+				D4C58B811BEF66DE00178908 /* KodamaTests.swift */,
+				D4C58B7F1BEF66DE00178908 /* Supporting Files */,
+			);
+			path = KodamaTests;
+			sourceTree = "<group>";
+		};
+		D4C58B7F1BEF66DE00178908 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D4C58B801BEF66DE00178908 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D4C58B611BEF66DE00178908 /* Kodama */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4C58B851BEF66DE00178908 /* Build configuration list for PBXNativeTarget "Kodama" */;
+			buildPhases = (
+				D4C58B5E1BEF66DE00178908 /* Sources */,
+				D4C58B5F1BEF66DE00178908 /* Frameworks */,
+				D4C58B601BEF66DE00178908 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Kodama;
+			productName = Kodama;
+			productReference = D4C58B621BEF66DE00178908 /* Kodama.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D4C58B7A1BEF66DE00178908 /* KodamaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4C58B881BEF66DE00178908 /* Build configuration list for PBXNativeTarget "KodamaTests" */;
+			buildPhases = (
+				D4C58B771BEF66DE00178908 /* Sources */,
+				D4C58B781BEF66DE00178908 /* Frameworks */,
+				D4C58B791BEF66DE00178908 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D4C58B7D1BEF66DE00178908 /* PBXTargetDependency */,
+			);
+			name = KodamaTests;
+			productName = KodamaTests;
+			productReference = D4C58B7B1BEF66DE00178908 /* KodamaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D4C58B5A1BEF66DE00178908 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "小島 佳幸";
+				TargetAttributes = {
+					D4C58B611BEF66DE00178908 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					D4C58B7A1BEF66DE00178908 = {
+						CreatedOnToolsVersion = 6.3.2;
+						TestTargetID = D4C58B611BEF66DE00178908;
+					};
+				};
+			};
+			buildConfigurationList = D4C58B5D1BEF66DE00178908 /* Build configuration list for PBXProject "Kodama" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D4C58B591BEF66DE00178908;
+			productRefGroup = D4C58B631BEF66DE00178908 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D4C58B611BEF66DE00178908 /* Kodama */,
+				D4C58B7A1BEF66DE00178908 /* KodamaTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D4C58B601BEF66DE00178908 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4C58B761BEF66DE00178908 /* LaunchScreen.xib in Resources */,
+				D4C58B731BEF66DE00178908 /* Images.xcassets in Resources */,
+				D4C58B6A1BEF66DE00178908 /* GameScene.sks in Resources */,
+				D4C58B711BEF66DE00178908 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4C58B791BEF66DE00178908 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D4C58B5E1BEF66DE00178908 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4C58B6C1BEF66DE00178908 /* GameScene.swift in Sources */,
+				D4C58B6E1BEF66DE00178908 /* GameViewController.swift in Sources */,
+				D4C58B681BEF66DE00178908 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4C58B771BEF66DE00178908 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4C58B821BEF66DE00178908 /* KodamaTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D4C58B7D1BEF66DE00178908 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4C58B611BEF66DE00178908 /* Kodama */;
+			targetProxy = D4C58B7C1BEF66DE00178908 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D4C58B6F1BEF66DE00178908 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4C58B701BEF66DE00178908 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D4C58B741BEF66DE00178908 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4C58B751BEF66DE00178908 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D4C58B831BEF66DE00178908 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D4C58B841BEF66DE00178908 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D4C58B861BEF66DE00178908 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Kodama/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D4C58B871BEF66DE00178908 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Kodama/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		D4C58B891BEF66DE00178908 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = KodamaTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kodama.app/Kodama";
+			};
+			name = Debug;
+		};
+		D4C58B8A1BEF66DE00178908 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = KodamaTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kodama.app/Kodama";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D4C58B5D1BEF66DE00178908 /* Build configuration list for PBXProject "Kodama" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4C58B831BEF66DE00178908 /* Debug */,
+				D4C58B841BEF66DE00178908 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4C58B851BEF66DE00178908 /* Build configuration list for PBXNativeTarget "Kodama" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4C58B861BEF66DE00178908 /* Debug */,
+				D4C58B871BEF66DE00178908 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D4C58B881BEF66DE00178908 /* Build configuration list for PBXNativeTarget "KodamaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4C58B891BEF66DE00178908 /* Debug */,
+				D4C58B8A1BEF66DE00178908 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D4C58B5A1BEF66DE00178908 /* Project object */;
+}
