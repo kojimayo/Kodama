@@ -15,7 +15,7 @@ struct UserScoreData {
     let playDate:String
 }
 
-class GameScene: SKScene {
+class GameScene: SKScene , EidolonDelegate {
     var timer : NSTimer?
     var timeIntervarl : NSTimeInterval = 2.0
     var tileDiv : CGFloat = 8.0
@@ -25,13 +25,15 @@ class GameScene: SKScene {
     var ratio : CGFloat = 0.0
     var totalCnt : Int32 = 0
     var getCnt : Int32 = 0
-    var lvlCnt :Int32 = 0
+    var timerCallCnt :Int32 = 0
     
     var gameOverFlag : Bool = false
     var gameOverDone : Bool = false
     
     var lvlLabel : SKLabelNode?
     var gameOverLabel : SKLabelNode?
+    
+    var kodamaList : [Kodama] = [Kodama]()
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -45,7 +47,7 @@ class GameScene: SKScene {
         self.setBackground()
         self.addChild(myLabel)
         
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(self.timeIntervarl, target: self, selector: "createKodama", userInfo: nil, repeats: true)
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(self.timeIntervarl, target: self, selector: #selector(GameScene.createEldolon), userInfo: nil, repeats: true)
     }
     
     func updateString() {
@@ -62,36 +64,99 @@ class GameScene: SKScene {
 
     }
     
+    func createEldolon(){
+        self.timerCallCnt += 1
+        if arc4random_uniform(8) == 0 {
+            self.createGejigeji()
+        } else if (self.totalCnt % 20 == 0 && self.totalCnt != 0){
+            self.totalCnt += 1
+            self.createOhotokesama()
+        } else {
+            self.totalCnt += 1
+            self.createKodama()
+        }
+        
+    }
     
     func createKodama(){
         var posix : CGFloat
         var posiy : CGFloat
         var posiz : UInt32 = 0
         var depthsize : [CGFloat] = [1.5 ,1.0 ,0.75]
-        
-        self.totalCnt += 1
-        self.lvlCnt += 1
+
 
         posiz = arc4random_uniform(UInt32(self.depthDiv))
         posix = CGFloat(arc4random_uniform(UInt32(self.tileDiv * depthsize[Int(posiz)])))
         posiy = CGFloat(arc4random_uniform(UInt32(self.tileDiv * depthsize[Int(posiz)])))
 
-        
-        let kodamaSprite = SKSpriteNode(imageNamed: "kodama")
-        kodamaSprite.name = "kodama"
-        kodamaSprite.size = CGSize(width: self.frame.width/(self.tileDiv*depthsize[Int(posiz)]), height: self.frame.height/(self.tileDiv*depthsize[Int(posiz)]))
-        kodamaSprite.position = CGPoint(x: kodamaSprite.size.width*(0.5+posix), y: kodamaSprite.size.height*(0.5+posiy))
-        kodamaSprite.alpha = 0.0
-        kodamaSprite.zPosition = 50
-        
-        kodamaSprite.runAction(SKAction.sequence([SKAction.waitForDuration(3.0),SKAction.removeFromParent()]))
-        kodamaSprite.runAction(SKAction.sequence([SKAction.fadeAlphaTo(1.0, duration: 1.0), SKAction.waitForDuration(1.0),SKAction.fadeAlphaTo(0.0, duration: 1.0)]))
-        
+        let kodama = Kodama()
+        kodama.size = CGSize(width: self.frame.width/(self.tileDiv*depthsize[Int(posiz)]), height: self.frame.height/(self.tileDiv*depthsize[Int(posiz)]))
+        kodama.position = CGPoint(x: kodama.size.width*(0.5+posix), y: kodama.size.height*(0.5+posiy))
+        kodama.alpha = 0.0
+        kodama.zPosition = 50.0
+        kodama.delegate = self
+        kodamaList.append(kodama)
+        kodama.runAction()
+
         //print("add kodama")
-        self.addChild(kodamaSprite)
+        self.addChild(kodama.sprite)
         
         
     }
+    
+    func eidolonRemove(eidolon: Eidolon) {
+        if let kodama = eidolon as? Kodama {
+            var index = 0
+            for k in kodamaList {
+                if kodama.getNumber() == k.getNumber() {
+                    kodamaList.removeAtIndex(index)
+                    print("remove kodmalist at \(index)")
+                    break
+                }
+                index += 1
+            }
+        }
+    }
+    
+    func createGejigeji(){
+        var posix : CGFloat
+        var posiy : CGFloat
+        var posiz : UInt32 = 0
+        var depthsize : [CGFloat] = [1.5 ,1.0 ,0.75]
+        
+        posiz = arc4random_uniform(UInt32(self.depthDiv))
+        posix = CGFloat(arc4random_uniform(UInt32(self.tileDiv * depthsize[Int(posiz)])))
+        posiy = CGFloat(arc4random_uniform(UInt32(self.tileDiv * depthsize[Int(posiz)])))
+        
+        let gejigeji = GejiGeji()
+        gejigeji.size = CGSize(width: self.frame.width/(self.tileDiv*depthsize[Int(posiz)]), height: self.frame.height/(self.tileDiv*depthsize[Int(posiz)]))
+        gejigeji.position = CGPoint(x: gejigeji.size.width*(0.5+posix), y: gejigeji.size.height*(0.5+posiy))
+        gejigeji.alpha = 0.0
+        gejigeji.zPosition = 50.0
+        gejigeji.runAction()
+
+        self.addChild(gejigeji.sprite)
+        
+        
+    }
+    
+    func createOhotokesama(){
+        let posiy = CGFloat(arc4random_uniform(UInt32(self.tileDiv)))
+        
+        print("Posiy" + posiy.description)
+        
+        let ohotoke = Ohotokesama()
+        ohotoke.size = CGSize(width: self.frame.width/(self.tileDiv), height: self.frame.height/(self.tileDiv))
+        ohotoke.position = CGPoint(x: -ohotoke.size.width*0.5, y: ohotoke.size.height*(0.5+posiy))
+        ohotoke.alpha = 0.0
+        ohotoke.zPosition = 50.0
+        ohotoke.runAction()
+        
+        self.addChild(ohotoke.sprite)
+
+        
+    }
+
     
     func createMagicParticle(position :CGPoint){
         if let magicEmitterSprite = SKEmitterNode(fileNamed: "MyParticle.sks") {
@@ -106,12 +171,13 @@ class GameScene: SKScene {
     }
     
     func judgeLevel(){
+        //print("Intervarl:" + self.timeIntervarl.description + "*" + self.timerCallCnt.description)
+        if self.timeIntervarl * Double(self.timerCallCnt) > 5.0 {
+            self.timerCallCnt = 0
+            print("getcnt:" + self.getCnt.description + "/" + totalCnt.description)
+            self.ratio = (self.totalCnt >= 10) ? CGFloat(self.getCnt)/CGFloat(self.totalCnt) : 100.0
         
-        if self.timeIntervarl * Double(self.lvlCnt) > 10.0 {
-            self.lvlCnt = 0
-            self.ratio = CGFloat(self.getCnt)/CGFloat(self.totalCnt)
-        
-            if self.ratio < 0.8 {
+            if self.ratio < 0.6 {
                 self.gameOverFlag = true
                 self.gameOver()
             } else {
@@ -119,7 +185,7 @@ class GameScene: SKScene {
                 if self.timeIntervarl > 0.2 {
                     self.timeIntervarl -= 0.1
                     self.timer?.invalidate()
-                    self.timer = NSTimer.scheduledTimerWithTimeInterval(self.timeIntervarl, target: self, selector: "createKodama", userInfo: nil, repeats: true)
+                    self.timer = NSTimer.scheduledTimerWithTimeInterval(self.timeIntervarl, target: self, selector: "createEldolon", userInfo: nil, repeats: true)
                 }
             }
         }
@@ -250,7 +316,7 @@ class GameScene: SKScene {
         if self.gameOverFlag == true {
             self.totalCnt = 0
             self.getCnt = 0
-            self.lvlCnt = 0
+            self.timerCallCnt = 0
             self.gameLevel = 1
             self.timeIntervarl = 2.0
             self.timer = NSTimer.scheduledTimerWithTimeInterval(self.timeIntervarl, target: self, selector: "createKodama", userInfo: nil, repeats: true)
@@ -293,12 +359,36 @@ class GameScene: SKScene {
             
             let nodes = self.nodesAtPoint(location)
             for node in (nodes ) {
-                if node.name == "kodama" {
+                if let eidolon = node.userData?.objectForKey("wrapped") as? EidolonAction {
+                    self.getCnt += eidolon.getScore()
+
+                    eidolon.onTapIn(self)
                     node.removeAllActions()
                     node.removeFromParent()
-                    self.getCnt += 1
-            
-                    self.createMagicParticle(location)
+                    
+                    if eidolon.name.hasPrefix(Kodama.picname){
+                        if let nodekodama = node.userData?.objectForKey("wrapped") as? Kodama {
+                            var index = 0
+                            for kodama in kodamaList {
+                                if kodama.getNumber() == nodekodama.getNumber() {
+                                    kodamaList.removeAtIndex(index)
+                                    print("delete kodmalist at \(index)")
+                                    break
+                                }
+                                index += 1
+                            }
+                        }
+                    }
+                    if node.userData?.objectForKey("wrapped") is Ohotokesama {
+                        for kodama in kodamaList {
+                            kodama.onTapIn(self)
+                            self.getCnt += kodama.getScore()
+                            kodama.sprite.removeAllActions()
+                            kodama.sprite.removeFromParent()
+                        }
+                        kodamaList.removeAll()
+                    }
+                
                 }
             }
             

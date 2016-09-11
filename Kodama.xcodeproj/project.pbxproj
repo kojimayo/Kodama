@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D432245C1D43B90900918317 /* Ohotokesama.swift in Sources */ = {isa = PBXBuildFile; fileRef = D432245B1D43B90900918317 /* Ohotokesama.swift */; };
+		D4365BDB1D3FCF89002AB27C /* GejiGeji.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4365BDA1D3FCF89002AB27C /* GejiGeji.swift */; };
+		D4365BDD1D3FD36D002AB27C /* GejigejiParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = D4365BDC1D3FD36D002AB27C /* GejigejiParticle.sks */; };
+		D484C8941D7883C20082E54D /* OhotokesamaParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = D484C8931D7883C20082E54D /* OhotokesamaParticle.sks */; };
 		D4AC0D971BF8D5100021B68A /* OpeningSecne.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AC0D961BF8D5100021B68A /* OpeningSecne.swift */; };
 		D4C58B681BEF66DE00178908 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C58B671BEF66DE00178908 /* AppDelegate.swift */; };
 		D4C58B6C1BEF66DE00178908 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C58B6B1BEF66DE00178908 /* GameScene.swift */; };
@@ -17,6 +21,8 @@
 		D4C58B821BEF66DE00178908 /* KodamaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C58B811BEF66DE00178908 /* KodamaTests.swift */; };
 		D4C58B951BF0F4FD00178908 /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = D4C58B931BF0F4FD00178908 /* MyParticle.sks */; };
 		D4C58B961BF0F4FD00178908 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = D4C58B941BF0F4FD00178908 /* spark.png */; };
+		D4E9E5D81D1FB07100A3D9CC /* Eidolon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E9E5D71D1FB07100A3D9CC /* Eidolon.swift */; };
+		D4E9E5DA1D1FB5BA00A3D9CC /* Kodama.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E9E5D91D1FB5BA00A3D9CC /* Kodama.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +36,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D432245B1D43B90900918317 /* Ohotokesama.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ohotokesama.swift; sourceTree = "<group>"; };
+		D4365BDA1D3FCF89002AB27C /* GejiGeji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GejiGeji.swift; sourceTree = "<group>"; };
+		D4365BDC1D3FD36D002AB27C /* GejigejiParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GejigejiParticle.sks; sourceTree = "<group>"; };
+		D484C8931D7883C20082E54D /* OhotokesamaParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = OhotokesamaParticle.sks; sourceTree = "<group>"; };
 		D4AC0D961BF8D5100021B68A /* OpeningSecne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpeningSecne.swift; sourceTree = "<group>"; };
 		D4C58B621BEF66DE00178908 /* Kodama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kodama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4C58B661BEF66DE00178908 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -44,6 +54,8 @@
 		D4C58B811BEF66DE00178908 /* KodamaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KodamaTests.swift; sourceTree = "<group>"; };
 		D4C58B931BF0F4FD00178908 /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
 		D4C58B941BF0F4FD00178908 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		D4E9E5D71D1FB07100A3D9CC /* Eidolon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eidolon.swift; sourceTree = "<group>"; };
+		D4E9E5D91D1FB5BA00A3D9CC /* Kodama.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Kodama.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,8 +99,14 @@
 			children = (
 				D4C58B671BEF66DE00178908 /* AppDelegate.swift */,
 				D4C58B6B1BEF66DE00178908 /* GameScene.swift */,
+				D4E9E5D91D1FB5BA00A3D9CC /* Kodama.swift */,
+				D4365BDA1D3FCF89002AB27C /* GejiGeji.swift */,
+				D432245B1D43B90900918317 /* Ohotokesama.swift */,
+				D484C8931D7883C20082E54D /* OhotokesamaParticle.sks */,
+				D4E9E5D71D1FB07100A3D9CC /* Eidolon.swift */,
 				D4AC0D961BF8D5100021B68A /* OpeningSecne.swift */,
 				D4C58B6D1BEF66DE00178908 /* GameViewController.swift */,
+				D4365BDC1D3FD36D002AB27C /* GejigejiParticle.sks */,
 				D4C58B931BF0F4FD00178908 /* MyParticle.sks */,
 				D4C58B941BF0F4FD00178908 /* spark.png */,
 				D4C58B6F1BEF66DE00178908 /* Main.storyboard */,
@@ -212,6 +230,8 @@
 				D4C58B731BEF66DE00178908 /* Images.xcassets in Resources */,
 				D4C58B711BEF66DE00178908 /* Main.storyboard in Resources */,
 				D4C58B951BF0F4FD00178908 /* MyParticle.sks in Resources */,
+				D484C8941D7883C20082E54D /* OhotokesamaParticle.sks in Resources */,
+				D4365BDD1D3FD36D002AB27C /* GejigejiParticle.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +252,11 @@
 				D4AC0D971BF8D5100021B68A /* OpeningSecne.swift in Sources */,
 				D4C58B6C1BEF66DE00178908 /* GameScene.swift in Sources */,
 				D4C58B6E1BEF66DE00178908 /* GameViewController.swift in Sources */,
+				D4E9E5D81D1FB07100A3D9CC /* Eidolon.swift in Sources */,
+				D4365BDB1D3FCF89002AB27C /* GejiGeji.swift in Sources */,
+				D4E9E5DA1D1FB5BA00A3D9CC /* Kodama.swift in Sources */,
 				D4C58B681BEF66DE00178908 /* AppDelegate.swift in Sources */,
+				D432245C1D43B90900918317 /* Ohotokesama.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,9 +385,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Kodama/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.puranohi.KodamaSagashi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -375,9 +400,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Kodama/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.puranohi.KodamaSagashi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
