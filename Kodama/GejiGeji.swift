@@ -22,20 +22,20 @@ class GejiGeji : Eidolon, EidolonAction {
         super.init(imageName: GejiGeji.picname);
         
         self.score = GEJIGEJI_SCORE
-        self.actions.append(SKAction.sequence([SKAction.waitForDuration(3.0),SKAction.removeFromParent()]))
-        self.actions.append(SKAction.repeatActionForever(SKAction.rotateByAngle(CGFloat(M_PI*2), duration: 0.8)))
-        self.actions.append(SKAction.sequence([SKAction.fadeAlphaTo(1.0, duration: 1.0), SKAction.waitForDuration(1.0),SKAction.fadeAlphaTo(0.0, duration: 1.0)]))
+        self.actions.append(SKAction.sequence([SKAction.wait(forDuration: 3.0),SKAction.removeFromParent()]))
+        self.actions.append(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(M_PI*2), duration: 0.8)))
+        self.actions.append(SKAction.sequence([SKAction.fadeAlpha(to: 1.0, duration: 1.0), SKAction.wait(forDuration: 1.0),SKAction.fadeAlpha(to: 0.0, duration: 1.0)]))
     }
     
     
-    func onTapIn(scene: SKScene) {
+    func onTapIn(_ scene: SKScene) {
         if let magicEmitterSprite = SKEmitterNode(fileNamed: "GejigejiParticle.sks") {
             magicEmitterSprite.position = self.sprite.position
             magicEmitterSprite.alpha = 0
             magicEmitterSprite.zPosition = 50
             scene.addChild(magicEmitterSprite)
             
-            magicEmitterSprite.runAction(SKAction.sequence([SKAction.fadeAlphaTo(1, duration: 0.3), SKAction.fadeAlphaTo(0, duration: 1.5), SKAction.removeFromParent()]))
+            magicEmitterSprite.run(SKAction.sequence([SKAction.fadeAlpha(to: 1, duration: 0.3), SKAction.fadeAlpha(to: 0, duration: 1.5), SKAction.removeFromParent()]))
         }
         
     }

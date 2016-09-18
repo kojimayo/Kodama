@@ -12,13 +12,13 @@ import SpriteKit
 protocol EidolonAction {
     func runAction()
     func stopAction()
-    func onTapIn(scene :SKScene)
+    func onTapIn(_ scene :SKScene)
     var name :String {get}
     func getScore() -> Int32
 }
 
 protocol EidolonDelegate {
-    func eidolonRemove(eidolon :Eidolon) -> Void
+    func eidolonRemove(_ eidolon :Eidolon) -> Void
 }
 
 
@@ -32,7 +32,7 @@ class Eidolon {
         sprite = SKSpriteNode(imageNamed: imageName)
         sprite.name = imageName
         sprite.userData = NSMutableDictionary();
-        sprite.userData?.setObject(self, forKey: "wrapped")
+        sprite.userData?.setObject(self, forKey: "wrapped" as NSCopying)
         return sprite
     }(self.imageName)
     
@@ -62,18 +62,18 @@ class Eidolon {
     }
     
     func runAction() {
-        self.sprite.paused = false
+        self.sprite.isPaused = false
         for action in self.actions {
             if (action != nil && self.delegate != nil) {
-                self.sprite.runAction(action!, completion: {self.delegate?.eidolonRemove(self)} )
+                self.sprite.run(action!, completion: {self.delegate?.eidolonRemove(self)} )
             } else {
-                self.sprite.runAction(action!)
+                self.sprite.run(action!)
             }
         }
     }
     
     func stopAction() {
-        self.sprite.paused = true
+        self.sprite.isPaused = true
     }
 
 

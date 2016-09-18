@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 class OpeningScene: SKScene {
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         /* Setup your scene here */
         let back = SKSpriteNode(imageNamed: "mori-opening")
         back.size = self.size
@@ -20,18 +20,18 @@ class OpeningScene: SKScene {
         let texture = SKTexture(imageNamed: "kodama_title")
         let title = SKSpriteNode(texture: texture)
         title.size = CGSize(width: self.frame.width * 3.0/4.0, height: texture.size().height)
-        title.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
+        title.position = CGPoint(x:self.frame.midX, y:self.frame.midY)
         title.zPosition = 100
         
         self.addChild(back)
         self.addChild(title)
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
-        let transition = SKTransition.doorsOpenHorizontalWithDuration(1.0)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        let transition = SKTransition.doorsOpenHorizontal(withDuration: 1.0)
         
         let scene = GameScene()
-        scene.scaleMode = .AspectFill
+        scene.scaleMode = .aspectFill
         scene.size = self.size
         
         self.view?.presentScene(scene, transition: transition)

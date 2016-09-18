@@ -16,8 +16,8 @@ struct UserScoreData {
 }
 
 class GameScene: SKScene , EidolonDelegate {
-    var timer : NSTimer?
-    var timeIntervarl : NSTimeInterval = 2.0
+    var timer : Timer?
+    var timeIntervarl : TimeInterval = 2.0
     var tileDiv : CGFloat = 8.0
     var depthDiv : CGFloat = 3.0
     
@@ -35,19 +35,24 @@ class GameScene: SKScene , EidolonDelegate {
     
     var kodamaList : [Kodama] = [Kodama]()
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         /* Setup your scene here */
         let myLabel = SKLabelNode(fontNamed:"Chalkduster")
         myLabel.text = "Lvl 1 total 0";
         myLabel.fontSize = 35;
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:self.frame.height - 45);
+        myLabel.position = CGPoint(x:self.frame.midX, y:self.frame.height - 45);
         myLabel.zPosition = 50
         self.lvlLabel = myLabel
         
         self.setBackground()
         self.addChild(myLabel)
         
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(self.timeIntervarl, target: self, selector: #selector(GameScene.createEldolon), userInfo: nil, repeats: true)
+        let progressbar : CustomProgressBar = CustomProgressBar()
+        progressbar.setProgress(0.7)
+        
+        self.addChild(progressbar)
+        
+        self.timer = Timer.scheduledTimer(timeInterval: self.timeIntervarl, target: self, selector: #selector(GameScene.createEldolon), userInfo: nil, repeats: true)
     }
     
     func updateString() {
@@ -104,12 +109,12 @@ class GameScene: SKScene , EidolonDelegate {
         
     }
     
-    func eidolonRemove(eidolon: Eidolon) {
+    func eidolonRemove(_ eidolon: Eidolon) {
         if let kodama = eidolon as? Kodama {
             var index = 0
             for k in kodamaList {
                 if kodama.getNumber() == k.getNumber() {
-                    kodamaList.removeAtIndex(index)
+                    kodamaList.remove(at: index)
                     print("remove kodmalist at \(index)")
                     break
                 }
@@ -158,14 +163,14 @@ class GameScene: SKScene , EidolonDelegate {
     }
 
     
-    func createMagicParticle(position :CGPoint){
+    func createMagicParticle(_ position :CGPoint){
         if let magicEmitterSprite = SKEmitterNode(fileNamed: "MyParticle.sks") {
             magicEmitterSprite.position = position
             magicEmitterSprite.alpha = 0
             magicEmitterSprite.zPosition = 50
             self.addChild(magicEmitterSprite)
         
-            magicEmitterSprite.runAction(SKAction.sequence([SKAction.fadeAlphaTo(1, duration: 0.3), SKAction.fadeAlphaTo(0, duration: 1.1), SKAction.removeFromParent()]))
+            magicEmitterSprite.run(SKAction.sequence([SKAction.fadeAlpha(to: 1, duration: 0.3), SKAction.fadeAlpha(to: 0, duration: 1.1), SKAction.removeFromParent()]))
         }
         
     }
@@ -185,34 +190,34 @@ class GameScene: SKScene , EidolonDelegate {
                 if self.timeIntervarl > 0.2 {
                     self.timeIntervarl -= 0.1
                     self.timer?.invalidate()
-                    self.timer = NSTimer.scheduledTimerWithTimeInterval(self.timeIntervarl, target: self, selector: "createEldolon", userInfo: nil, repeats: true)
+                    self.timer = Timer.scheduledTimer(timeInterval: self.timeIntervarl, target: self, selector: #selector(GameScene.createEldolon), userInfo: nil, repeats: true)
                 }
             }
         }
     }
     
-    func setHighScore(cnt :Int, level: Int)->Int{
+    func setHighScore(_ cnt :Int, level: Int)->Int{
         var usrScoreDatas : [UserScoreData] = getHighScore()
-        let userDefault = NSUserDefaults.standardUserDefaults()
+        let userDefault = UserDefaults.standard
         var rank = 5
         
         for n in 0...4 {
             if usrScoreDatas[n].count < cnt {
-                let formatter = NSDateFormatter()
-                formatter.locale = NSLocale.currentLocale()
+                let formatter = DateFormatter()
+                formatter.locale = Locale.current
                 formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-                let now_date = formatter.stringFromDate(NSDate())
+                let now_date = formatter.string(from: Date())
                 let new_data : UserScoreData = UserScoreData(count: cnt, level: level, playDate: now_date)
-                usrScoreDatas.insert(new_data, atIndex: n)
+                usrScoreDatas.insert(new_data, at: n)
                 rank = n
                 break
             }
         }
         
         for n in 0...4 {
-            userDefault.setInteger(usrScoreDatas[n].count, forKey: "HighCount" + n.description)
-            userDefault.setInteger(usrScoreDatas[n].level, forKey: "HighLevel" + n.description)
-            userDefault.setObject(usrScoreDatas[n].playDate, forKey: "HighDate" + n.description)
+            userDefault.set(usrScoreDatas[n].count, forKey: "HighCount" + n.description)
+            userDefault.set(usrScoreDatas[n].level, forKey: "HighLevel" + n.description)
+            userDefault.set(usrScoreDatas[n].playDate, forKey: "HighDate" + n.description)
         }
 
         return rank
@@ -220,13 +225,13 @@ class GameScene: SKScene , EidolonDelegate {
     
     func getHighScore() -> Array<UserScoreData> {
         var highScores : [UserScoreData] = []
-        let userDefault = NSUserDefaults.standardUserDefaults()
+        let userDefault = UserDefaults.standard
         
         var count :Int, level:Int
         for n in 0...4 {
-            count = userDefault.integerForKey("HighCount" + n.description)
-            level  = userDefault.integerForKey("HighLevel" + n.description)
-            if let dateString = userDefault.stringForKey("HighDate" + n.description) {
+            count = userDefault.integer(forKey: "HighCount" + n.description)
+            level  = userDefault.integer(forKey: "HighLevel" + n.description)
+            if let dateString = userDefault.string(forKey: "HighDate" + n.description) {
                 highScores.append(UserScoreData(count: count, level: level, playDate: dateString))
             } else {
                 highScores.append(UserScoreData(count: 0, level: 0, playDate: "---/--/-- --:--:--"))
@@ -245,15 +250,15 @@ class GameScene: SKScene , EidolonDelegate {
            let scene = self.createImageScene("mori-gameover")
             
             let overLabel  = SKLabelNode(fontNamed: "Chalkduster")
-            overLabel.fontColor = UIColor.blueColor()
+            overLabel.fontColor = UIColor.blue
             overLabel.fontSize = 45
-            overLabel.position = CGPoint(x: CGRectGetMidX(self.frame), y: self.size.height - 40)
+            overLabel.position = CGPoint(x: self.frame.midX, y: self.size.height - 40)
             overLabel.zPosition = 10
             overLabel.text = "Sa yo na ra"
             let scoreLabel  = SKLabelNode(fontNamed: "Chalkduster")
-            scoreLabel.fontColor = UIColor.whiteColor()
+            scoreLabel.fontColor = UIColor.white
             scoreLabel.fontSize = 35
-            scoreLabel.position = CGPoint(x: CGRectGetMidX(self.frame), y: self.size.height-80)
+            scoreLabel.position = CGPoint(x: self.frame.midX, y: self.size.height-80)
             scoreLabel.zPosition = 100
             scoreLabel.text = "Total \(self.getCnt) Lvl \(self.gameLevel)"
             
@@ -264,19 +269,19 @@ class GameScene: SKScene , EidolonDelegate {
             for n in 0...4 {
                 let newScoreBack = SKSpriteNode(imageNamed: "ScoreBack")
                 newScoreBack.size = CGSize(width: self.size.width*5/6.0, height: 50.0)
-                newScoreBack.position = CGPoint(x: CGRectGetMidX(self.frame), y: self.size.height - 110.0  - (CGFloat(n)*(50 + 5)))
+                newScoreBack.position = CGPoint(x: self.frame.midX, y: self.size.height - 110.0  - (CGFloat(n)*(50 + 5)))
                 newScoreBack.zPosition = 99
                 
                 let scoreHisLabel1 = SKLabelNode(fontNamed: "Chalkduster")
-                scoreHisLabel1.color = SKColor.blackColor()
-                scoreHisLabel1.position = CGPoint(x: CGRectGetMidX(self.frame), y: self.size.height - 110.0  - (CGFloat(n)*(50 + 5)))
+                scoreHisLabel1.color = SKColor.black
+                scoreHisLabel1.position = CGPoint(x: self.frame.midX, y: self.size.height - 110.0  - (CGFloat(n)*(50 + 5)))
                 scoreHisLabel1.fontSize = 16
                 scoreHisLabel1.text = "Rank:\(n+1) Total: " + highScores[n].count.description + " Level: " + highScores[n].level.description
                 scoreHisLabel1.zPosition = 100
                 
                 let scoreHisLabel2 = SKLabelNode(fontNamed: "Chalkduster")
-                scoreHisLabel2.color = SKColor.blackColor()
-                scoreHisLabel2.position = CGPoint(x: CGRectGetMidX(self.frame), y: self.size.height - 110.0  - (CGFloat(n)*(50 + 5 )) - 16)
+                scoreHisLabel2.color = SKColor.black
+                scoreHisLabel2.position = CGPoint(x: self.frame.midX, y: self.size.height - 110.0  - (CGFloat(n)*(50 + 5 )) - 16)
                 scoreHisLabel2.fontSize = 16
                 scoreHisLabel2.zPosition = 100
                 scoreHisLabel2.text = highScores[n].playDate
@@ -298,14 +303,14 @@ class GameScene: SKScene , EidolonDelegate {
             scene.addChild(overLabel)
             scene.addChild(scoreLabel)
             
-            let transition = SKTransition.crossFadeWithDuration(1.0)
+            let transition = SKTransition.crossFade(withDuration: 1.0)
             self.view?.presentScene(scene, transition: transition)
             
             self.gameOverLabel = overLabel
             self.timer?.invalidate()
             self.timer = nil
             
-            self.paused = true
+            self.isPaused = true
             
             self.gameOverDone = true
         }
@@ -319,7 +324,7 @@ class GameScene: SKScene , EidolonDelegate {
             self.timerCallCnt = 0
             self.gameLevel = 1
             self.timeIntervarl = 2.0
-            self.timer = NSTimer.scheduledTimerWithTimeInterval(self.timeIntervarl, target: self, selector: "createKodama", userInfo: nil, repeats: true)
+            self.timer = Timer.scheduledTimer(timeInterval: self.timeIntervarl, target: self, selector: #selector(GameScene.createKodama), userInfo: nil, repeats: true)
 
             
             self.judgeLevel()
@@ -327,14 +332,14 @@ class GameScene: SKScene , EidolonDelegate {
             
             self.gameOverLabel?.removeFromParent()
             
-            self.paused = false
+            self.isPaused = false
             
             self.gameOverFlag = false
             self.gameOverDone = false
         }
     }
     
-    func createImageScene(imageName: String)-> SKScene{
+    func createImageScene(_ imageName: String)-> SKScene{
         let scene = SKScene(size: self.size)
         let sprite = SKSpriteNode(imageNamed: imageName)
         sprite.size = scene.size
@@ -344,22 +349,22 @@ class GameScene: SKScene , EidolonDelegate {
         let restartTouch = TouchButton(imageNamed: "RestartBack")
         restartTouch.size = CGSize(width:self.size.width*3/4.0, height:80)
         restartTouch.position = CGPoint(x: scene.size.width*0.5, y: restartTouch.size.height/2 + 20)
-        restartTouch.userInteractionEnabled = true
+        restartTouch.isUserInteractionEnabled = true
     
         scene.addChild(restartTouch)
         return scene
     }
     
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         /* Called when a touch begins */
         
         for touch in (touches ){
-            let location = touch.locationInNode(self)
+            let location = touch.location(in: self)
             
-            let nodes = self.nodesAtPoint(location)
+            let nodes = self.nodes(at: location)
             for node in (nodes ) {
-                if let eidolon = node.userData?.objectForKey("wrapped") as? EidolonAction {
+                if let eidolon = node.userData?.object(forKey: "wrapped") as? EidolonAction {
                     self.getCnt += eidolon.getScore()
 
                     eidolon.onTapIn(self)
@@ -367,11 +372,11 @@ class GameScene: SKScene , EidolonDelegate {
                     node.removeFromParent()
                     
                     if eidolon.name.hasPrefix(Kodama.picname){
-                        if let nodekodama = node.userData?.objectForKey("wrapped") as? Kodama {
+                        if let nodekodama = node.userData?.object(forKey: "wrapped") as? Kodama {
                             var index = 0
                             for kodama in kodamaList {
                                 if kodama.getNumber() == nodekodama.getNumber() {
-                                    kodamaList.removeAtIndex(index)
+                                    kodamaList.remove(at: index)
                                     print("delete kodmalist at \(index)")
                                     break
                                 }
@@ -379,7 +384,7 @@ class GameScene: SKScene , EidolonDelegate {
                             }
                         }
                     }
-                    if node.userData?.objectForKey("wrapped") is Ohotokesama {
+                    if node.userData?.object(forKey: "wrapped") is Ohotokesama {
                         for kodama in kodamaList {
                             kodama.onTapIn(self)
                             self.getCnt += kodama.getScore()
@@ -401,7 +406,7 @@ class GameScene: SKScene , EidolonDelegate {
         
     }
    
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
         self.judgeLevel()
         self.updateString()
@@ -409,10 +414,10 @@ class GameScene: SKScene , EidolonDelegate {
 }
 
 class TouchButton: SKSpriteNode {
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let transition = SKTransition.flipVerticalWithDuration(1.0)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let transition = SKTransition.flipVertical(withDuration: 1.0)
         let scene = GameScene()
-        scene.scaleMode = .AspectFill
+        scene.scaleMode = .aspectFill
         scene.size = CGSize(width: self.scene!.size.width, height: self.scene!.size.height)
         self.scene?.view?.presentScene(scene, transition: transition)
 
@@ -420,11 +425,11 @@ class TouchButton: SKSpriteNode {
 }
 
 class TouchScene: SKScene {
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
-        let transition = SKTransition.flipVerticalWithDuration(1.0)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        let transition = SKTransition.flipVertical(withDuration: 1.0)
         
         let scene = GameScene()
-        scene.scaleMode = .AspectFill
+        scene.scaleMode = .aspectFill
         scene.size = self.size
         
         self.view?.presentScene(scene, transition: transition)

@@ -27,21 +27,21 @@ class Kodama : Eidolon, EidolonAction {
         let nmAction : SKAction
         let alphaAction : SKAction
         
-        rmAction = SKAction.sequence([SKAction.waitForDuration(3.0),SKAction.removeFromParent()])
-        nmAction = SKAction.sequence([SKAction.repeatAction(SKAction.sequence([SKAction.rotateToAngle(CGFloat(M_PI_4/2), duration: 0.05),SKAction.rotateToAngle(CGFloat(-1*M_PI_4/2), duration: 0.05)]), count: 5),SKAction.rotateToAngle(0.0, duration: 0.05)])
-        alphaAction = SKAction.sequence([SKAction.fadeAlphaTo(1.0, duration: 1.0), SKAction.waitForDuration(1.0),SKAction.fadeAlphaTo(0.0, duration: 1.0)])
+        rmAction = SKAction.sequence([SKAction.wait(forDuration: 3.0),SKAction.removeFromParent()])
+        nmAction = SKAction.sequence([SKAction.repeat(SKAction.sequence([SKAction.rotate(toAngle: CGFloat(M_PI_4/2), duration: 0.05),SKAction.rotate(toAngle: CGFloat(-1*M_PI_4/2), duration: 0.05)]), count: 5),SKAction.rotate(toAngle: 0.0, duration: 0.05)])
+        alphaAction = SKAction.sequence([SKAction.fadeAlpha(to: 1.0, duration: 1.0), SKAction.wait(forDuration: 1.0),SKAction.fadeAlpha(to: 0.0, duration: 1.0)])
         
         self.actions.append(SKAction.group([rmAction, nmAction, alphaAction]))
     }
         
-    func onTapIn(scene: SKScene) {
+    func onTapIn(_ scene: SKScene) {
         if let magicEmitterSprite = SKEmitterNode(fileNamed: "MyParticle.sks") {
             magicEmitterSprite.position = self.sprite.position
             magicEmitterSprite.alpha = 0
             magicEmitterSprite.zPosition = 50
             scene.addChild(magicEmitterSprite)
             
-            magicEmitterSprite.runAction(SKAction.sequence([SKAction.fadeAlphaTo(1, duration: 0.3), SKAction.fadeAlphaTo(0, duration: 1.1), SKAction.removeFromParent()]))
+            magicEmitterSprite.run(SKAction.sequence([SKAction.fadeAlpha(to: 1, duration: 0.3), SKAction.fadeAlpha(to: 0, duration: 1.1), SKAction.removeFromParent()]))
         }
 
     }
@@ -51,7 +51,7 @@ class Kodama : Eidolon, EidolonAction {
     }
     
     func getNumber() -> Int? {
-        let number : String =  self.name.substringFromIndex(Kodama.picname.startIndex.advancedBy(KODAMA_NAME_LENGTH))
+        let number : String =  self.name.substring(from: Kodama.picname.characters.index(Kodama.picname.startIndex, offsetBy: KODAMA_NAME_LENGTH))
         return Int(number)
     }
     

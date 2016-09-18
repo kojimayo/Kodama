@@ -12,6 +12,7 @@
 		D4365BDD1D3FD36D002AB27C /* GejigejiParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = D4365BDC1D3FD36D002AB27C /* GejigejiParticle.sks */; };
 		D484C8941D7883C20082E54D /* OhotokesamaParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = D484C8931D7883C20082E54D /* OhotokesamaParticle.sks */; };
 		D4AC0D971BF8D5100021B68A /* OpeningSecne.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AC0D961BF8D5100021B68A /* OpeningSecne.swift */; };
+		D4BE462C1D855DB70040D7B8 /* CustomProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BE462B1D855DB70040D7B8 /* CustomProgressBar.swift */; };
 		D4C58B681BEF66DE00178908 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C58B671BEF66DE00178908 /* AppDelegate.swift */; };
 		D4C58B6C1BEF66DE00178908 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C58B6B1BEF66DE00178908 /* GameScene.swift */; };
 		D4C58B6E1BEF66DE00178908 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C58B6D1BEF66DE00178908 /* GameViewController.swift */; };
@@ -41,6 +42,7 @@
 		D4365BDC1D3FD36D002AB27C /* GejigejiParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GejigejiParticle.sks; sourceTree = "<group>"; };
 		D484C8931D7883C20082E54D /* OhotokesamaParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = OhotokesamaParticle.sks; sourceTree = "<group>"; };
 		D4AC0D961BF8D5100021B68A /* OpeningSecne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpeningSecne.swift; sourceTree = "<group>"; };
+		D4BE462B1D855DB70040D7B8 /* CustomProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomProgressBar.swift; path = ../CustomProgressBar.swift; sourceTree = "<group>"; };
 		D4C58B621BEF66DE00178908 /* Kodama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kodama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4C58B661BEF66DE00178908 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4C58B671BEF66DE00178908 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 		D4C58B641BEF66DE00178908 /* Kodama */ = {
 			isa = PBXGroup;
 			children = (
+				D4BE462B1D855DB70040D7B8 /* CustomProgressBar.swift */,
 				D4C58B671BEF66DE00178908 /* AppDelegate.swift */,
 				D4C58B6B1BEF66DE00178908 /* GameScene.swift */,
 				D4E9E5D91D1FB5BA00A3D9CC /* Kodama.swift */,
@@ -194,9 +197,11 @@
 					D4C58B611BEF66DE00178908 = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = R8HUPBK3EX;
+						LastSwiftMigration = 0800;
 					};
 					D4C58B7A1BEF66DE00178908 = {
 						CreatedOnToolsVersion = 6.3.2;
+						LastSwiftMigration = 0800;
 						TestTargetID = D4C58B611BEF66DE00178908;
 					};
 				};
@@ -250,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4AC0D971BF8D5100021B68A /* OpeningSecne.swift in Sources */,
+				D4BE462C1D855DB70040D7B8 /* CustomProgressBar.swift in Sources */,
 				D4C58B6C1BEF66DE00178908 /* GameScene.swift in Sources */,
 				D4C58B6E1BEF66DE00178908 /* GameViewController.swift in Sources */,
 				D4E9E5D81D1FB07100A3D9CC /* Eidolon.swift in Sources */,
@@ -393,6 +399,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = jp.puranohi.KodamaSagashi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -408,6 +415,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = jp.puranohi.KodamaSagashi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -427,6 +435,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "koji.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kodama.app/Kodama";
 			};
 			name = Debug;
@@ -443,6 +452,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "koji.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kodama.app/Kodama";
 			};
 			name = Release;
