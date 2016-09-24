@@ -31,3 +31,23 @@ class CustomProgressBar : SKSpriteNode {
     }
     
 }
+
+class CustomProgressBar2 : SKCropNode {
+    override init() {
+        super.init()
+        let sprite : SKSpriteNode = SKSpriteNode(color: UIColor.red, size:CGSize(width: UIScreen.main.bounds.width*9/10.0, height: 30.0))
+        self.maskNode = sprite
+        let sprite2 : SKSpriteNode = SKSpriteNode(imageNamed: "progressBar2")
+        sprite.size = CGSize(width: UIScreen.main.bounds.width*9/10.0, height: 30.0)
+        self.addChild(sprite2)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        //fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setProgress(_ progress:CGFloat){
+        self.xScale = progress
+    }
+}

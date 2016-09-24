@@ -55,6 +55,7 @@ class GameScene: SKScene , EidolonDelegate {
         
         self.progressBar.anchorPoint = CGPoint(x: 0.0, y: 0.5)
         self.progressBar.position = CGPoint(x: 15, y: self.frame.size.height - 100)
+        // TODO:カスタムプログレスバー位置がうまくいない。暫定
         
         self.addChild(self.progressBar)
         
