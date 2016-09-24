@@ -36,6 +36,7 @@ class Kodama : Eidolon, EidolonAction {
     }
         
     func onTapIn(_ scene: SKScene) {
+        self.remove()
         if let magicEmitterSprite = SKEmitterNode(fileNamed: "MyParticle.sks") {
             magicEmitterSprite.position = self.sprite.position
             magicEmitterSprite.alpha = 0

@@ -381,7 +381,6 @@ class GameScene: SKScene , EidolonDelegate {
                     self.getCnt += eidolon.getScore()
 
                     eidolon.onTapIn(self)
-                    eidolon.remove()
                     
                     if eidolon.name.hasPrefix(Kodama.picname) || eidolon.name.hasPrefix(GejiGeji.picname){
                         if let nodeKodama = node.userData?.object(forKey: "wrapped") as? Kodama {
