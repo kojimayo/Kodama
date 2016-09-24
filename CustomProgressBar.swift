@@ -15,9 +15,9 @@ class CustomProgressBar : SKSpriteNode {
     }
     
     convenience init(){
-        let texture : SKTexture? = SKTexture(imageNamed:"progressBarImage")
+        let texture : SKTexture? = SKTexture(imageNamed:"progressBar2")
         //self.init(texture: texture, color: UIColor.red, size: texture!.size())
-        self.init(texture: texture, color:UIColor.red, size: texture!.size())
+        self.init(texture: texture, color:UIColor.red, size: CGSize(width: UIScreen.main.bounds.width*9/10.0, height: 30.0))
     }
     
     
@@ -27,7 +27,7 @@ class CustomProgressBar : SKSpriteNode {
     }
     
     func setProgress(_ progress:CGFloat){
-        //self.maskNode?.xScale = progress
+        self.xScale = progress
     }
     
 }

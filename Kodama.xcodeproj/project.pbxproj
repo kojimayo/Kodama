@@ -10,6 +10,7 @@
 		D432245C1D43B90900918317 /* Ohotokesama.swift in Sources */ = {isa = PBXBuildFile; fileRef = D432245B1D43B90900918317 /* Ohotokesama.swift */; };
 		D4365BDB1D3FCF89002AB27C /* GejiGeji.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4365BDA1D3FCF89002AB27C /* GejiGeji.swift */; };
 		D4365BDD1D3FD36D002AB27C /* GejigejiParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = D4365BDC1D3FD36D002AB27C /* GejigejiParticle.sks */; };
+		D467A3591D8ED19300A244B5 /* damageParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = D467A3581D8ED19300A244B5 /* damageParticle.sks */; };
 		D484C8941D7883C20082E54D /* OhotokesamaParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = D484C8931D7883C20082E54D /* OhotokesamaParticle.sks */; };
 		D4AC0D971BF8D5100021B68A /* OpeningSecne.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AC0D961BF8D5100021B68A /* OpeningSecne.swift */; };
 		D4BE462C1D855DB70040D7B8 /* CustomProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BE462B1D855DB70040D7B8 /* CustomProgressBar.swift */; };
@@ -40,6 +41,7 @@
 		D432245B1D43B90900918317 /* Ohotokesama.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ohotokesama.swift; sourceTree = "<group>"; };
 		D4365BDA1D3FCF89002AB27C /* GejiGeji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GejiGeji.swift; sourceTree = "<group>"; };
 		D4365BDC1D3FD36D002AB27C /* GejigejiParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GejigejiParticle.sks; sourceTree = "<group>"; };
+		D467A3581D8ED19300A244B5 /* damageParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = damageParticle.sks; sourceTree = "<group>"; };
 		D484C8931D7883C20082E54D /* OhotokesamaParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = OhotokesamaParticle.sks; sourceTree = "<group>"; };
 		D4AC0D961BF8D5100021B68A /* OpeningSecne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpeningSecne.swift; sourceTree = "<group>"; };
 		D4BE462B1D855DB70040D7B8 /* CustomProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomProgressBar.swift; path = ../CustomProgressBar.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				D432245B1D43B90900918317 /* Ohotokesama.swift */,
 				D484C8931D7883C20082E54D /* OhotokesamaParticle.sks */,
 				D4E9E5D71D1FB07100A3D9CC /* Eidolon.swift */,
+				D467A3581D8ED19300A244B5 /* damageParticle.sks */,
 				D4AC0D961BF8D5100021B68A /* OpeningSecne.swift */,
 				D4C58B6D1BEF66DE00178908 /* GameViewController.swift */,
 				D4365BDC1D3FD36D002AB27C /* GejigejiParticle.sks */,
@@ -191,7 +194,7 @@
 			attributes = {
 				LastSwiftMigration = 0720;
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "小島 佳幸";
 				TargetAttributes = {
 					D4C58B611BEF66DE00178908 = {
@@ -234,6 +237,7 @@
 				D4C58B761BEF66DE00178908 /* LaunchScreen.xib in Resources */,
 				D4C58B731BEF66DE00178908 /* Images.xcassets in Resources */,
 				D4C58B711BEF66DE00178908 /* Main.storyboard in Resources */,
+				D467A3591D8ED19300A244B5 /* damageParticle.sks in Resources */,
 				D4C58B951BF0F4FD00178908 /* MyParticle.sks in Resources */,
 				D484C8941D7883C20082E54D /* OhotokesamaParticle.sks in Resources */,
 				D4365BDD1D3FD36D002AB27C /* GejigejiParticle.sks in Resources */,
@@ -317,8 +321,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -362,8 +368,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -383,6 +391,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

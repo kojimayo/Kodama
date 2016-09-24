@@ -9,7 +9,8 @@
 import Foundation
 import SpriteKit
 
-private let GEJIGEJI_SCORE : Int32 = -5
+private let GEJIGEJI_SCORE : Int32 = 5
+private let GEJIGEJI_DAMAGE : Int32 = 20
 
 class GejiGeji : Eidolon, EidolonAction {
     static let picname : String = "gejigeji"
@@ -29,7 +30,7 @@ class GejiGeji : Eidolon, EidolonAction {
     
     
     func onTapIn(_ scene: SKScene) {
-        if let magicEmitterSprite = SKEmitterNode(fileNamed: "GejigejiParticle.sks") {
+        if let magicEmitterSprite = SKEmitterNode(fileNamed: "MyParticle.sks") {
             magicEmitterSprite.position = self.sprite.position
             magicEmitterSprite.alpha = 0
             magicEmitterSprite.zPosition = 50
@@ -44,5 +45,8 @@ class GejiGeji : Eidolon, EidolonAction {
         return self.score
     }
 
+    override func getDamage() -> Int32 {
+        return GEJIGEJI_DAMAGE
+    }
     
 }

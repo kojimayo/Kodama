@@ -22,7 +22,6 @@ class GameScene: SKScene , EidolonDelegate {
     var depthDiv : CGFloat = 3.0
     
     var gameLevel : Int32 = 1
-    var ratio : CGFloat = 0.0
     var totalCnt : Int32 = 0
     var getCnt : Int32 = 0
     var timerCallCnt :Int32 = 0
@@ -33,7 +32,14 @@ class GameScene: SKScene , EidolonDelegate {
     var lvlLabel : SKLabelNode?
     var gameOverLabel : SKLabelNode?
     
-    var kodamaList : [Kodama] = [Kodama]()
+    var enemyList : [EidolonAction] = [EidolonAction]()
+    let progressBar : CustomProgressBar = CustomProgressBar()
+    
+    var life : CGFloat = 100 {
+        didSet {
+            self.progressBar.setProgress(self.life/100.0)
+        }
+    }
     
     override func didMove(to view: SKView) {
         /* Setup your scene here */
@@ -47,16 +53,16 @@ class GameScene: SKScene , EidolonDelegate {
         self.setBackground()
         self.addChild(myLabel)
         
-        let progressbar : CustomProgressBar = CustomProgressBar()
-        progressbar.setProgress(0.7)
+        self.progressBar.anchorPoint = CGPoint(x: 0.0, y: 0.5)
+        self.progressBar.position = CGPoint(x: 15, y: self.frame.size.height - 100)
         
-        self.addChild(progressbar)
+        self.addChild(self.progressBar)
         
         self.timer = Timer.scheduledTimer(timeInterval: self.timeIntervarl, target: self, selector: #selector(GameScene.createEldolon), userInfo: nil, repeats: true)
     }
     
     func updateString() {
-        self.lvlLabel?.text = "Lvl \(self.gameLevel) total \(self.getCnt)"
+        self.lvlLabel?.text = "Lvl \(self.gameLevel) Score \(self.getCnt)"
     }
     
     func setBackground(){
@@ -69,18 +75,18 @@ class GameScene: SKScene , EidolonDelegate {
 
     }
     
+    
+    
     func createEldolon(){
         self.timerCallCnt += 1
-        if arc4random_uniform(8) == 0 {
+        if arc4random_uniform(8) == 0 && self.gameLevel >= 10 {
             self.createGejigeji()
-        } else if (self.totalCnt % 20 == 0 && self.totalCnt != 0){
-            self.totalCnt += 1
+        } else if (self.totalCnt % 30 == 0 && self.totalCnt != 0){
             self.createOhotokesama()
         } else {
-            self.totalCnt += 1
             self.createKodama()
         }
-        
+        self.totalCnt += 1
     }
     
     func createKodama(){
@@ -100,8 +106,8 @@ class GameScene: SKScene , EidolonDelegate {
         kodama.alpha = 0.0
         kodama.zPosition = 50.0
         kodama.delegate = self
-        kodamaList.append(kodama)
-        kodama.runAction()
+        enemyList.append(kodama)
+        kodama.runAction(on:self)
 
         //print("add kodama")
         self.addChild(kodama.sprite)
@@ -109,18 +115,27 @@ class GameScene: SKScene , EidolonDelegate {
         
     }
     
+    func removeFromEnemyList<T:Eidolon>(element : T){
+        var index = 0
+        for enemy in enemyList {
+            guard let listElement = enemy as? T else {
+                continue
+            }
+            if listElement === element {
+                enemyList.remove(at: index)
+                break;
+            }
+            index += 1
+        }
+    }
+    
     func eidolonRemove(_ eidolon: Eidolon) {
         if let kodama = eidolon as? Kodama {
-            var index = 0
-            for k in kodamaList {
-                if kodama.getNumber() == k.getNumber() {
-                    kodamaList.remove(at: index)
-                    print("remove kodmalist at \(index)")
-                    break
-                }
-                index += 1
-            }
+            removeFromEnemyList(element: kodama)
+        } else if let gejigeji = eidolon as? GejiGeji {
+            removeFromEnemyList(element: gejigeji)
         }
+        self.life -= CGFloat(eidolon.getDamage())
     }
     
     func createGejigeji(){
@@ -138,7 +153,7 @@ class GameScene: SKScene , EidolonDelegate {
         gejigeji.position = CGPoint(x: gejigeji.size.width*(0.5+posix), y: gejigeji.size.height*(0.5+posiy))
         gejigeji.alpha = 0.0
         gejigeji.zPosition = 50.0
-        gejigeji.runAction()
+        gejigeji.runAction(on:self)
 
         self.addChild(gejigeji.sprite)
         
@@ -148,14 +163,12 @@ class GameScene: SKScene , EidolonDelegate {
     func createOhotokesama(){
         let posiy = CGFloat(arc4random_uniform(UInt32(self.tileDiv)))
         
-        print("Posiy" + posiy.description)
-        
         let ohotoke = Ohotokesama()
         ohotoke.size = CGSize(width: self.frame.width/(self.tileDiv), height: self.frame.height/(self.tileDiv))
         ohotoke.position = CGPoint(x: -ohotoke.size.width*0.5, y: ohotoke.size.height*(0.5+posiy))
         ohotoke.alpha = 0.0
         ohotoke.zPosition = 50.0
-        ohotoke.runAction()
+        ohotoke.runAction(on:self)
         
         self.addChild(ohotoke.sprite)
 
@@ -180,9 +193,8 @@ class GameScene: SKScene , EidolonDelegate {
         if self.timeIntervarl * Double(self.timerCallCnt) > 5.0 {
             self.timerCallCnt = 0
             print("getcnt:" + self.getCnt.description + "/" + totalCnt.description)
-            self.ratio = (self.totalCnt >= 10) ? CGFloat(self.getCnt)/CGFloat(self.totalCnt) : 100.0
         
-            if self.ratio < 0.6 {
+            if self.life <= 0 {
                 self.gameOverFlag = true
                 self.gameOver()
             } else {
@@ -359,39 +371,31 @@ class GameScene: SKScene , EidolonDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         /* Called when a touch begins */
         
-        for touch in (touches ){
+        for touch in (touches){
             let location = touch.location(in: self)
             
             let nodes = self.nodes(at: location)
-            for node in (nodes ) {
+            for node in (nodes) {
                 if let eidolon = node.userData?.object(forKey: "wrapped") as? EidolonAction {
                     self.getCnt += eidolon.getScore()
 
                     eidolon.onTapIn(self)
-                    node.removeAllActions()
-                    node.removeFromParent()
+                    eidolon.remove()
                     
-                    if eidolon.name.hasPrefix(Kodama.picname){
-                        if let nodekodama = node.userData?.object(forKey: "wrapped") as? Kodama {
-                            var index = 0
-                            for kodama in kodamaList {
-                                if kodama.getNumber() == nodekodama.getNumber() {
-                                    kodamaList.remove(at: index)
-                                    print("delete kodmalist at \(index)")
-                                    break
-                                }
-                                index += 1
-                            }
+                    if eidolon.name.hasPrefix(Kodama.picname) || eidolon.name.hasPrefix(GejiGeji.picname){
+                        if let nodeKodama = node.userData?.object(forKey: "wrapped") as? Kodama {
+                            removeFromEnemyList(element: nodeKodama)
+                        } else if let nodeGejiGeji = node.userData?.object(forKey: "wrapped") as? GejiGeji {
+                            removeFromEnemyList(element: nodeGejiGeji)
                         }
                     }
+                    
                     if node.userData?.object(forKey: "wrapped") is Ohotokesama {
-                        for kodama in kodamaList {
-                            kodama.onTapIn(self)
-                            self.getCnt += kodama.getScore()
-                            kodama.sprite.removeAllActions()
-                            kodama.sprite.removeFromParent()
+                        for enemy in enemyList{
+                            enemy.onTapIn(self)
+                            self.getCnt += enemy.getScore()
                         }
-                        kodamaList.removeAll()
+                        enemyList.removeAll()
                     }
                 
                 }
@@ -400,12 +404,11 @@ class GameScene: SKScene , EidolonDelegate {
             if self.gameOverFlag == true {
                 self.reset()
             }
-            
-            
         }
         
     }
-   
+        
+        
     override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
         self.judgeLevel()

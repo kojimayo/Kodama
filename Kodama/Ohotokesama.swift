@@ -9,7 +9,8 @@
 import Foundation
 import SpriteKit
 
-private let OHOTOKESAMA_SCORE : Int32 = 1
+private let OHOTOKESAMA_SCORE : Int32 = 10
+private let OHOTOKESAMA_DAMAGE : Int32 = 0
 
 class Ohotokesama : Eidolon, EidolonAction {
     static let picname : String = "ohotokesama"
@@ -42,6 +43,10 @@ class Ohotokesama : Eidolon, EidolonAction {
     
     func getScore() -> Int32 {
         return self.score
+    }
+    
+    override func getDamage() -> Int32 {
+        return OHOTOKESAMA_DAMAGE
     }
     
     

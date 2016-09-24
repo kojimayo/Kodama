@@ -2,8 +2,8 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "kodama.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "kodama.png"
     },
     {
       "idiom" : "universal",

@@ -10,11 +10,12 @@ import Foundation
 import SpriteKit
 
 private let KODAMA_SCORE : Int32 = 1
+private let KODAMA_DAMAGE : Int32 = 10
 private let KODAMA_NAME_LENGTH : Int = 6
 
 class Kodama : Eidolon, EidolonAction {
     static var number : Int32 = 0
-    static var picname : String = "kodama"
+    static var picname : String = "kodama2"
     let name: String
     
     init (){
@@ -54,6 +55,11 @@ class Kodama : Eidolon, EidolonAction {
         let number : String =  self.name.substring(from: Kodama.picname.characters.index(Kodama.picname.startIndex, offsetBy: KODAMA_NAME_LENGTH))
         return Int(number)
     }
+    
+    override func getDamage() -> Int32 {
+        return KODAMA_DAMAGE
+    }
+    
     
     
 }
