@@ -79,14 +79,16 @@ class Eidolon {
     func runAction(on scene:SKScene) {
         self.sprite.isPaused = false
         self.scene = scene
-        for action in self.actions {
-            if (action != nil && self.delegate != nil) {
-                self.sprite.run(action!){self.completeAction()}
-            } else {
-                self.sprite.run(action!)
-            }
+        var actionGroup : [SKAction] = [SKAction]()
+        for action in self.actions where action != nil {
+            actionGroup.append(action!)
         }
         
+        if (self.delegate != nil) {
+            self.sprite.run(SKAction.group(actionGroup)){self.completeAction()}
+        } else {
+            self.sprite.run(SKAction.group(actionGroup))
+        }
     }
     
     func completeAction(){

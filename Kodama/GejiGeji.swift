@@ -23,9 +23,22 @@ class GejiGeji : Eidolon, EidolonAction {
         super.init(imageName: GejiGeji.picname);
         
         self.score = GEJIGEJI_SCORE
+    
         self.actions.append(SKAction.sequence([SKAction.wait(forDuration: 3.0),SKAction.removeFromParent()]))
         self.actions.append(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(M_PI*2), duration: 0.8)))
-        self.actions.append(SKAction.sequence([SKAction.fadeAlpha(to: 1.0, duration: 1.0), SKAction.wait(forDuration: 1.0),SKAction.fadeAlpha(to: 0.0, duration: 1.0)]))
+             self.actions.append(SKAction.sequence([SKAction.fadeAlpha(to: 1.0, duration: 1.0), SKAction.wait(forDuration: 1.0),SKAction.fadeAlpha(to: 0.0, duration: 1.0)]))
+    }
+    
+    convenience init(position: CGPoint){
+        self.init()
+        self.position = position
+        var moveAction : SKAction
+        if self.position.x <= UIScreen.main.applicationFrame.width / 2 {
+            moveAction = SKAction.moveBy(x: 100, y: 0, duration: 1.0)
+        } else {
+            moveAction = SKAction.moveBy(x: -100, y: 0, duration: 1.0)
+        }
+        self.actions.append(SKAction.repeatForever(SKAction.sequence([moveAction, moveAction.reversed()])))
     }
     
     

@@ -85,7 +85,7 @@ class GameScene: SKScene , EidolonDelegate {
     func createEldolon(){
         self.timerCallCnt += 1
         
-        if arc4random_uniform(8) == 0 && self.gameLevel >= 5 {
+        if arc4random_uniform(5) == 0 && self.gameLevel >= 5 {
             self.createGejigeji()
         } else {
             self.createKodama()
@@ -157,9 +157,12 @@ class GameScene: SKScene , EidolonDelegate {
         posix = CGFloat(arc4random_uniform(UInt32(self.tileDiv * depthsize[Int(posiz)])))
         posiy = CGFloat(arc4random_uniform(UInt32(self.tileDiv * depthsize[Int(posiz)])))
         
-        let gejigeji = GejiGeji()
-        gejigeji.size = CGSize(width: self.frame.width/(self.tileDiv*depthsize[Int(posiz)]), height: self.frame.height/(self.tileDiv*depthsize[Int(posiz)]))
-        gejigeji.position = CGPoint(x: gejigeji.size.width*(0.5+posix), y: gejigeji.size.height*(0.5+posiy))
+        let size : CGSize = CGSize(width: self.frame.width/(self.tileDiv*depthsize[Int(posiz)]), height: self.frame.height/(self.tileDiv*depthsize[Int(posiz)]))
+        let position : CGPoint = CGPoint(x: size.width*(0.5+posix), y: size.height*(0.5+posiy))
+        let gejigeji = GejiGeji(position: position)
+        gejigeji.size = size
+        gejigeji.position = position
+        print("gejigeji x \(gejigeji.position.x)")
         gejigeji.alpha = 0.0
         gejigeji.zPosition = 50.0
         gejigeji.runAction(on:self)
@@ -200,20 +203,17 @@ class GameScene: SKScene , EidolonDelegate {
     
     func judgeLevel(){
         //print("Intervarl:" + self.timeIntervarl.description + "*" + self.timerCallCnt.description)
-        if self.timeIntervarl * Double(self.timerCallCnt) > 5.0 {
+        if self.life <= 0 {
+            self.gameOverFlag = true
+            self.gameOver()
+        } else if self.timeIntervarl * Double(self.timerCallCnt) > 5.0 {
             self.timerCallCnt = 0
             print("getcnt:" + self.getCnt.description + "/" + totalCnt.description)
-        
-            if self.life <= 0 {
-                self.gameOverFlag = true
-                self.gameOver()
-            } else {
-                self.gameLevel += 1
-                if self.timeIntervarl > 0.2 {
-                    self.timeIntervarl -= 0.1
-                    self.timer?.invalidate()
-                    self.timer = Timer.scheduledTimer(timeInterval: self.timeIntervarl, target: self, selector: #selector(GameScene.createEldolon), userInfo: nil, repeats: true)
-                }
+            self.gameLevel += 1
+            if self.timeIntervarl > 0.4 {
+                self.timeIntervarl -= 0.1
+                self.timer?.invalidate()
+                self.timer = Timer.scheduledTimer(timeInterval: self.timeIntervarl, target: self, selector: #selector(GameScene.createEldolon), userInfo: nil, repeats: true)
             }
         }
     }
@@ -381,7 +381,7 @@ class GameScene: SKScene , EidolonDelegate {
         //print("call", #function, "enemy=\(enemyList.count) \(DispatchTime.now() )")
         for enemy in enemyList{
             enemy.onTapIn(self)
-            self.getCnt += enemy.getScore()
+            self.getCnt += 1
         }
         enemyList.removeAll()
     }
@@ -396,8 +396,6 @@ class GameScene: SKScene , EidolonDelegate {
             let nodes = self.nodes(at: location)
             for node in (nodes) {
                 if let eidolon = node.userData?.object(forKey: "wrapped") as? EidolonAction {
-                    self.getCnt += eidolon.getScore()
-
                     eidolon.onTapIn(self)
                     
                     if eidolon.name.hasPrefix(Kodama.picname) || eidolon.name.hasPrefix(GejiGeji.picname){
@@ -406,6 +404,7 @@ class GameScene: SKScene , EidolonDelegate {
                         } else if let nodeGejiGeji = node.userData?.object(forKey: "wrapped") as? GejiGeji {
                             removeFromEnemyList(element: nodeGejiGeji)
                         }
+                        self.getCnt += 1
                     }
                     
                     if node.userData?.object(forKey: "wrapped") is Ohotokesama {
