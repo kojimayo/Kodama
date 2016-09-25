@@ -25,6 +25,7 @@ class GameScene: SKScene , EidolonDelegate {
     var totalCnt : Int32 = 0
     var getCnt : Int32 = 0
     var timerCallCnt :Int32 = 0
+    var ohotokesamaCnt : Int32 = 0
     
     var gameOverFlag : Bool = false
     var gameOverDone : Bool = false
@@ -37,6 +38,9 @@ class GameScene: SKScene , EidolonDelegate {
     
     var life : CGFloat = 100 {
         didSet {
+            if self.life < 0 {
+                self.life = 0.0
+            }
             self.progressBar.setProgress(self.life/100.0)
         }
     }
@@ -80,12 +84,16 @@ class GameScene: SKScene , EidolonDelegate {
     
     func createEldolon(){
         self.timerCallCnt += 1
-        if arc4random_uniform(8) == 0 && self.gameLevel >= 10 {
+        
+        if arc4random_uniform(8) == 0 && self.gameLevel >= 5 {
             self.createGejigeji()
-        } else if (self.totalCnt % 30 == 0 && self.totalCnt != 0){
-            self.createOhotokesama()
         } else {
             self.createKodama()
+        }
+        
+        if (self.getCnt - self.ohotokesamaCnt >= 20 && self.getCnt != 0){
+            self.createOhotokesama()
+            self.ohotokesamaCnt = Int32(self.getCnt / 20) * 20
         }
         self.totalCnt += 1
     }
@@ -107,8 +115,8 @@ class GameScene: SKScene , EidolonDelegate {
         kodama.alpha = 0.0
         kodama.zPosition = 50.0
         kodama.delegate = self
-        enemyList.append(kodama)
         kodama.runAction(on:self)
+        enemyList.append(kodama)
 
         //print("add kodama")
         self.addChild(kodama.sprite)
@@ -155,6 +163,7 @@ class GameScene: SKScene , EidolonDelegate {
         gejigeji.alpha = 0.0
         gejigeji.zPosition = 50.0
         gejigeji.runAction(on:self)
+        enemyList.append(gejigeji)
 
         self.addChild(gejigeji.sprite)
         
@@ -368,6 +377,15 @@ class GameScene: SKScene , EidolonDelegate {
         return scene
     }
     
+    func onTapAllEnemy() {
+        //print("call", #function, "enemy=\(enemyList.count) \(DispatchTime.now() )")
+        for enemy in enemyList{
+            enemy.onTapIn(self)
+            self.getCnt += enemy.getScore()
+        }
+        enemyList.removeAll()
+    }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         /* Called when a touch begins */
@@ -391,11 +409,16 @@ class GameScene: SKScene , EidolonDelegate {
                     }
                     
                     if node.userData?.object(forKey: "wrapped") is Ohotokesama {
-                        for enemy in enemyList{
-                            enemy.onTapIn(self)
-                            self.getCnt += enemy.getScore()
+                        if let ohotokesama = node.userData?.object(forKey: "wrapped") as? Ohotokesama {
+                            let times = UInt32(ohotokesama.appearTime / 0.2)
+                            var dispatchTime: DispatchTime
+                            for i in 1...times {
+                                dispatchTime = DispatchTime.now() + Double(Int64(0.2 * Double(i) * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+                                DispatchQueue.global().asyncAfter(deadline: dispatchTime, execute: {
+                                    self.onTapAllEnemy()
+                                })
+                            }
                         }
-                        enemyList.removeAll()
                     }
                 
                 }

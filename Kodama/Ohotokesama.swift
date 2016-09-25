@@ -11,6 +11,7 @@ import SpriteKit
 
 private let OHOTOKESAMA_SCORE : Int32 = 10
 private let OHOTOKESAMA_DAMAGE : Int32 = 0
+private let OHOTOKESAMA_APPEAR_TIME : TimeInterval =  1.8
 
 class Ohotokesama : Eidolon, EidolonAction {
     static let picname : String = "ohotokesama"
@@ -36,14 +37,21 @@ class Ohotokesama : Eidolon, EidolonAction {
             magicEmitterSprite.alpha = 0
             magicEmitterSprite.zPosition = 50
             scene.addChild(magicEmitterSprite)
-            
-            magicEmitterSprite.run(SKAction.sequence([SKAction.fadeAlpha(to: 1, duration: 0.3), SKAction.fadeAlpha(to: 0, duration: 1.5), SKAction.removeFromParent()]))
+            let time : TimeInterval = OHOTOKESAMA_APPEAR_TIME - TimeInterval(0.3)
+            magicEmitterSprite.run(SKAction.sequence([SKAction.fadeAlpha(to: 1, duration: 0.3), SKAction.fadeAlpha(to: 0, duration: time), SKAction.removeFromParent()]))
+
         }
         
     }
     
     func getScore() -> Int32 {
         return self.score
+    }
+    
+    var appearTime : TimeInterval {
+        get {
+            return OHOTOKESAMA_APPEAR_TIME
+        }
     }
     
     override func getDamage() -> Int32 {
